@@ -13,7 +13,9 @@ podTemplate(label: label, containers: [
     def myRepo = checkout scm
     def gitCommit = myRepo.GIT_COMMIT
     def gitBranch = myRepo.GIT_BRANCH
-    def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+    def imageTag1 = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+    def imageTag2 = sh(script: "date +%Y%m%d%H%M%S", returnStdout: true).trim()
+    def imageTag = "${imageTag2}-${imageTag1}"
     def dockerRegistryUrl = "registry.cn-shenzhen.aliyuncs.com"
     def imageEndpoint = "e6yun/devops-test"
     def image = "${dockerRegistryUrl}/${imageEndpoint}"
