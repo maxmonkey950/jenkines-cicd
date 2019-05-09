@@ -7,8 +7,8 @@ public class Hello{
     public static void main(String[] agrs) throws Exception{
         System.out.println("hello");
         while (true) {
-            TimeUnit.SECONDS.sleep(100);
-            System.out.println("app sleeping...");
+            TimeUnit.SECONDS.sleep(3);
+            System.out.println("github, oh fuck!");
         }
     }
 }
