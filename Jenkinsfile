@@ -19,9 +19,12 @@ podTemplate(label: label, containers: [
     def dockerRegistryUrl = "registry.cn-shenzhen.aliyuncs.com"
     def imageEndpoint = "e6yun/devops-test"
     def image = "${dockerRegistryUrl}/${imageEndpoint}"
-
+    if ("${gitBranch}" == 'master') {
+                imageTag = "${gitBranch}-${imageTag}"
+            }
     stage('单元测试') {
       echo "1.测试阶段"
+      sh 'printenv'
     }
     stage('代码编译打包') {
       try {
@@ -49,14 +52,23 @@ podTemplate(label: label, containers: [
           }
        }
     }
-    stage('运行 Kubectl') {
+    
+    stage('上传镜像') {
       container('kubectl') {
         echo "查看 K8S 集群 Pod 列表"
         sh "kubectl get pods"
+      }
+    }
+    stage('部署') {
+      container('kubectl') {
+        echo "5. Deploy Stage"
+        if ("${gitBranch}" == 'master') {
+            input "确认要部署线上环境吗？"
+        }
         sh """
           sed -i "s#<IMAGE>#${image}#g" manifests/k8s.yaml
           sed -i "s#<IMAGE_TAG>#${imageTag}#g" manifests/k8s.yaml
-          kubectl apply -f manifests/k8s.yaml
+          kubectl apply -f manifests/k8s.yaml --record
         """
       }
     }
