@@ -8,7 +8,7 @@ public class Hello{
         System.out.println("hello");
         while (true) {
             TimeUnit.SECONDS.sleep(3);
-            System.out.println("github, oh shit!");
+            System.out.println("github, oh shit asd!");
         }
     }
 }
