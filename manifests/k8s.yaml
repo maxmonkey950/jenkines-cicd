@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: polling-server
-  namespace: kube-ops
+  name: demo-server
+  namespace: default
 spec:
   template:
     metadata:
       labels:
-        app: polling-server
+        app: demo-server
     spec:
       containers:
       - image: <IMAGE>:<IMAGE_TAG>
         imagePullPolicy: IfNotPresent
-        name: polling-server
+        name: demo-server
 
