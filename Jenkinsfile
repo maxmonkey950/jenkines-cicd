@@ -18,7 +18,7 @@ podTemplate(label: label, containers: [
     def imageTag2 = sh(script: "date +%Y%m%d%H%M%S", returnStdout: true).trim()
     def imageTag3 = "${imageTag2}-${imageTag}"
     def dockerRegistryUrl = "registry.cn-shenzhen.aliyuncs.com"
-    def imageEndpoint = "e6yun/devops-test"
+    def imageEndpoint = "xxx/devops-test"
     def image = "${dockerRegistryUrl}/${imageEndpoint}"
     if ("${gitBranch}" == 'master') {
                 imageTag = "${gitBranch}-${imageTag}"
