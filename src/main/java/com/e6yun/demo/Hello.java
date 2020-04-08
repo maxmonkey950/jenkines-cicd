@@ -1,4 +1,4 @@
-package com.e6yun.demo;
+package com.xxx.demo;
 
 import javax.print.attribute.standard.PrinterResolution;
 import java.util.concurrent.TimeUnit;
